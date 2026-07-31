@@ -134,6 +134,17 @@ Verified:
 systemctl status apache2
 
 Created a custom security-themed homepage.
+## Custom Apache Homepage
+
+A custom HTML page was deployed to the Apache web server running on the EC2 instance.
+
+Location:
+
+```
+/var/www/html/index.html
+```
+
+This page verifies successful deployment of the web server and demonstrates basic web hosting on AWS.
 
 Verified browser access using the EC2 public IP.
 
