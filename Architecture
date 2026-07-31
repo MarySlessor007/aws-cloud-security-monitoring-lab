@@ -1,0 +1,19 @@
+Internet
+   |
+   |
+Ubuntu EC2
+   |
+   +---- Apache
+   |
+   +---- CloudWatch Agent
+              |
+              |
+        CloudWatch
+        /        \
+   Logs       Metrics
+                |
+              Alarm
+                |
+               SNS
+                |
+              Email
