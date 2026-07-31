@@ -1,19 +1,34 @@
-Internet
-   |
-   |
-Ubuntu EC2
-   |
-   +---- Apache
-   |
-   +---- CloudWatch Agent
-              |
-              |
-        CloudWatch
-        /        \
-   Logs       Metrics
-                |
-              Alarm
-                |
-               SNS
-                |
-              Email
+                        Internet
+                            │
+                            │
+                    HTTP (80) / SSH (22)
+                            │
+                 ┌─────────────────────┐
+                 │   AWS Security Group │
+                 │ SSH → My IP Only     │
+                 │ HTTP → 0.0.0.0/0     │
+                 └──────────┬───────────┘
+                            │
+                    Amazon EC2 Instance
+                      Ubuntu 24.04 LTS
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+ Apache Web Server     auth.log         Apache Logs
+ (index.html)      /var/log/auth.log   access.log / error.log
+        │                   │                   │
+        └──────────────┬────┴───────────────────┘
+                       ▼
+              CloudWatch Agent
+                       │
+                       ▼
+            Amazon CloudWatch
+          ┌──────────┬──────────┐
+          │          │          │
+          ▼          ▼          ▼
+      Metrics     Log Groups   Alarms
+          │          │          │
+          └──────────┴──────────┘
+                 Monitoring &
+              Security Analytics
